@@ -1,0 +1,16 @@
+---
+- hosts: 
+    - jenkins_server
+    - jenkins_slave
+  become: true
+
+  vars_files:
+    - vars/main.yml
+  
+  pre_tasks:
+  - include_tasks: tasks/setup.yml
+
+  roles:
+    - geerlingguy.security
+    - geerlingguy.docker
+    - geerlingguy.kubernetes

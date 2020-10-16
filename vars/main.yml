@@ -1,0 +1,9 @@
+docker_install_compose: false
+docker_users:
+  - ubuntu
+
+# Kubernetes configuration.
+kubernetes_version: '1.16'
+kubernetes_allow_pods_on_master: false
+kubernetes_apiserver_advertise_address: '10.0.1.150'
+kubernetes_kubelet_extra_args: '--node-ip=10.0.1.100'
