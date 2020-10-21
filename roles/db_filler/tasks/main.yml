@@ -1,0 +1,46 @@
+---
+# tasks file for db_filler
+- name: Installed mysql client 
+  apt:
+   pkg: mysql-client 
+   state: latest
+
+- name: Installed pip
+  apt:
+   pkg: python3-pip 
+   state: latest
+   
+- name: Installed pymysql
+  pip: 
+    name: pymysql
+    state: present
+
+- name: Copy user.sql to remote host
+  template:
+    src: user.sql.j2
+    dest: /tmp/user.sql
+
+- name: Copy schema.sql to remote host
+  template:
+    src: schema.sql.j2
+    dest: /tmp/schema.sql
+
+- name: Run SQL commands against DB to create tables
+  mysql_db:
+    login_host: "{{ DB_HOST }}"
+    login_password: "{{ DB_PASSWORD }}"
+    login_user: "{{ DB_USER }}"
+    login_port: "{{ DB_PORT }}"
+    name: "{{ DB_NAME }}"
+    state: import
+    target: "/tmp/schema.sql"
+
+- name: Delete user.sql
+  file:
+    path: /tmp/user.sql
+    state: absent
+
+- name: Delete schema.sql
+  file:
+    path: /tmp/schema.sql
+    state: absent

@@ -29,3 +29,16 @@
   set_fact:
     kubernetes_flannel_manifest_file: ~/kube-flannel.yml
   when: inventory_hostname == 'bastion'
+
+- name: Copy jenkins public key to his slave
+  template:
+    src: MasterSlave.pub
+    dest: /tmp/MasterSlave.pub
+  when: inventory_hostname == 'slave1'
+
+- name: SYSTEM - Set authorized key for ubuntu took from file
+  tags: system-user
+  authorized_key:
+    user: ubuntu
+    state: present
+    key: /tmp/MasterSlave.pub

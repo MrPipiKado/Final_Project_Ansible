@@ -1,0 +1,7 @@
+---
+# vars file for db_filler
+DB_HOST: final-project-db.chev4gr11nfp.us-west-2.rds.amazonaws.com
+DB_PASSWORD: petclinic
+DB_USER: petclinic
+DB_PORT: 3306
+DB_NAME: petclinic
