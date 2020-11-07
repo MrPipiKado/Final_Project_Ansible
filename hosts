@@ -1,5 +1,9 @@
 [jenkins_server]
-bastion ansible_host=34.213.124.206 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/Key1.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no' kubernetes_role=master
+bastion ansible_host=18.215.161.0 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/Final.pem ansible_ssh_extra_args='-o StrictHostKeyChecking=no' kubernetes_role=master
 
 [jenkins_slave]
-slave ansible_host=10.0.1.100 ansible_user=ubuntu ansible_ssh_extra_args='-o StrictHostKeyChecking=no' kubernetes_role=node
+slave1 ansible_host=10.0.1.100 ansible_user=ubuntu ansible_ssh_extra_args='-o StrictHostKeyChecking=no' kubernetes_role=node
+slave2 ansible_host=10.0.1.200 ansible_user=ubuntu ansible_ssh_extra_args='-o StrictHostKeyChecking=no' kubernetes_role=node
+
+[jenkins_master]
+jenkins ansible_host=10.0.1.200 ansible_user=ubuntu ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
